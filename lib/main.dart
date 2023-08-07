@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app_routes.dart';
+import 'config/theme/app_theme.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Baby Safe',
+        theme: AppTheme().theme(),
         initialRoute: AppRouter.inicialRoute,
         routes: AppRouter.routes,
       ),

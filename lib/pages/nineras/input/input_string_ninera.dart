@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InputStringRecepcion extends StatelessWidget {
+class InputStringNinera extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final String? helperText;
@@ -17,7 +17,7 @@ class InputStringRecepcion extends StatelessWidget {
   final String formProperty;
   final Map<String, Object> formValues;
 
-  const InputStringRecepcion(
+  const InputStringNinera(
       {Key? key,
       this.hintText,
       this.labelText,
