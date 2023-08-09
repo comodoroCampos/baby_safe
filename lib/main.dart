@@ -1,3 +1,4 @@
+import 'package:baby_safe/bloc/nineras/nineras_bloc.dart';
 import 'package:baby_safe/bloc/tutor/tutor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => TutorBloc(),
+        ),
+        BlocProvider(
+          create: (context) => NinerasBloc(),
         ),
       ],
       child: MaterialApp(

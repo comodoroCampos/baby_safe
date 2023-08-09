@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../bloc/nineras/nineras_bloc.dart';
+import '../../../services/ninera_service.dart';
 import '../witget/input_string.dart';
 import 'package:baby_safe/utils/medida.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +13,11 @@ class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
 
   Map<String, Object> formValues = {'user': '', 'pass': ''};
-
+  final nineraService = NineraService();
   @override
   Widget build(BuildContext context) {
     Medidas(context);
-
+    final ninerasBloc = BlocProvider.of<NinerasBloc>(context, listen: false);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -137,7 +141,15 @@ class LoginPage extends StatelessWidget {
                                                   formValues['pass'].toString();
 
                                               try {
-                                                //Service Login
+                                                final nineras =
+                                                    await nineraService
+                                                        .getNineras();
+
+                                                ninerasBloc.add(
+                                                    IniciaNineras(nineras));
+
+                                                Navigator.pushNamed(
+                                                    context, 'ninera_list');
                                               } catch (e) {}
 
                                               //mesaje
