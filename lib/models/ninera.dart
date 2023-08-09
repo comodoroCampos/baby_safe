@@ -83,7 +83,7 @@ class Ninera {
         pass: json["pass"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "id": id,
         "nombre": nombre,
         "calleNumero": calleNumero,

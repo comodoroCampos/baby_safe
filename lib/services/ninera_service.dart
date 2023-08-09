@@ -33,9 +33,11 @@ class NineraService {
   Future<Ninera?> guardaNinera(Ninera ninera) async {
     // final urlApi = await storage.read(key: 'url') ?? '';
     // header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    print(json.encode(ninera.toMap()));
     Uri url = Uri.parse('$apiUrl/api-ninera/ninera');
     final resp = await http.post(url,
-        headers: header, body: json.encode(ninera.toJson()));
+        headers: header, body: json.encode(ninera.toMap()));
+
     if (resp.statusCode == 200) {
       final result = Ninera.fromJson(json.decode(resp.body));
 
