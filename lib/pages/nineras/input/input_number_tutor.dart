@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InputNumberRecepcion extends StatelessWidget {
+class InputNumberNinera extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final String? helperText;
@@ -13,7 +13,7 @@ class InputNumberRecepcion extends StatelessWidget {
 
   final String formProperty;
   final Map<String, Object> formValues;
-  const InputNumberRecepcion(
+  const InputNumberNinera(
       {Key? key,
       this.hintText,
       this.labelText,
