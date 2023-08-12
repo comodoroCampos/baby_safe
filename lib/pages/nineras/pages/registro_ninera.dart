@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../../../config/menu/menu.dart';
 import '../../../utils/constantes.dart';
 import '../input/input_string_ninera.dart';
 import '../input/select_item_ninera.dart';
@@ -36,6 +37,7 @@ class RegistroNineraPage extends StatelessWidget {
         title: const Text('Registro Niñera', style: TextStyle(fontSize: 16)),
         backgroundColor: const Color.fromARGB(198, 247, 3, 166),
       ),
+      drawer: const MenuLateral(),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(

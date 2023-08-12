@@ -1,3 +1,5 @@
+import '../utils/utils.dart';
+
 class Ninera {
   int? id;
   String? nombre;
@@ -66,8 +68,12 @@ class Ninera {
 
   factory Ninera.fromJson(Map<String, dynamic> json) => Ninera(
         id: json["id"],
-        nombre: json["nombre"],
-        calleNumero: json["calleNumero"],
+        nombre: json["nombre"] == null
+            ? null
+            : Utilidades.utf8convert(json["nombre"]),
+        calleNumero: json["calleNumero"] == null
+            ? null
+            : Utilidades.utf8convert(json["calleNumero"]),
         ciudad: json["ciudad"],
         region: json["region"],
         fechaNacimiento: json["fechaNacimiento"] == null

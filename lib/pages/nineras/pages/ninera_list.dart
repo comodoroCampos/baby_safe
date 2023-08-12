@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../config/menu/menu.dart';
 import '../../../services/ninera_service.dart';
 import '../widgets/ninera_card_list.dart';
 
@@ -18,6 +19,7 @@ class NinerasPage extends StatelessWidget {
               title: const Text('Niñeras', style: TextStyle(fontSize: 16)),
               backgroundColor: const Color.fromARGB(198, 247, 3, 166),
             ),
+            drawer: const MenuLateral(),
             body: SingleChildScrollView(
                 child: Container(
                     decoration: const BoxDecoration(
