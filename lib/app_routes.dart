@@ -1,4 +1,5 @@
 import 'package:baby_safe/pages/nineras/pages/registro_ninera.dart';
+import 'package:baby_safe/pages/registrar/pages/registrar.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/login/pages/login_page.dart';
@@ -9,6 +10,7 @@ class AppRouter {
 
   static Map<String, Widget Function(BuildContext)> routes = {
     'login': (context) => LoginPage(),
+    'registrar_usuario': (context) => RegistrarUsuario(),
     'registro_ninera': (context) => RegistroNineraPage(),
     'ninera_list': (context) => NinerasPage(),
   };

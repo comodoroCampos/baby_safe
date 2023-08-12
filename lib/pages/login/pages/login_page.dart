@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                                         ),
                                       ),
                                       const Text(
-                                        "Rata",
+                                        "",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -151,6 +151,33 @@ class LoginPage extends StatelessWidget {
                                                 Navigator.pushNamed(
                                                     context, 'ninera_list');
                                               } catch (e) {}
+
+                                              //mesaje
+                                            }),
+                                      ),
+                                      const SizedBox(
+                                        height: 60,
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width: 100,
+                                        decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 15, 145, 95),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5))),
+                                        child: TextButton(
+                                            child: const Text(
+                                              "Registrar",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            onPressed: () async {
+                                              FocusScope.of(context)
+                                                  .requestFocus(FocusNode());
+
+                                              Navigator.pushNamed(
+                                                  context, 'registrar_usuario');
 
                                               //mesaje
                                             }),
