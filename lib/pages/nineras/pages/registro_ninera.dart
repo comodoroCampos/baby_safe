@@ -1,9 +1,8 @@
 import 'package:baby_safe/models/ninera.dart';
 import 'package:baby_safe/pages/nineras/input/input_number_tutor.dart';
 import 'package:baby_safe/services/ninera_service.dart';
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../config/menu/menu.dart';
 import '../../../utils/constantes.dart';
@@ -200,6 +199,23 @@ class RegistroNineraPage extends StatelessWidget {
                           formValues: formNinera,
                           decimales: false,
                           valorInicial: '0',
+                        ),
+                        DateTimeFormField(
+                          decoration: const InputDecoration(
+                            hintStyle: TextStyle(color: Colors.black45),
+                            errorStyle: TextStyle(color: Colors.redAccent),
+                            border: OutlineInputBorder(),
+                            suffixIcon: Icon(Icons.event_note),
+                            labelText: 'Only time',
+                          ),
+                          mode: DateTimeFieldPickerMode.date,
+                          autovalidateMode: AutovalidateMode.always,
+                          validator: (e) => (e?.day ?? 0) == 1
+                              ? 'Please not the first day'
+                              : null,
+                          onDateSelected: (DateTime value) {
+                            print(value);
+                          },
                         ),
                         Center(
                           child: ElevatedButton(
