@@ -87,7 +87,25 @@ class RegistrarUsuario extends StatelessWidget {
                                   formRegistroUsuario['perfil'] =
                                       value ?? 'Seleccione';
                                 }),
-                          ]))
+                          ])),
+                  Container(
+                      height: 40,
+                      width: 100,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 15, 145, 95),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: TextButton(
+                          child: const Text(
+                            "Siguiente",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            FocusScope.of(context).requestFocus(FocusNode());
+
+                            Navigator.pushNamed(context, 'registro_ninera');
+
+                            //mesaje
+                          })),
                 ],
               ),
             ),
