@@ -33,7 +33,7 @@ class RegistroTutorPage extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: const Text('Registro Tutor', style: TextStyle(fontSize: 16)),
-        backgroundColor: const Color.fromARGB(198, 247, 3, 166),
+        backgroundColor: Color.fromARGB(197, 3, 101, 247),
       ),
       drawer: const MenuLateral(),
       body: SingleChildScrollView(
