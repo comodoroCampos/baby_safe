@@ -1,4 +1,4 @@
-const apiUrl = 'http://25.68.76.119';
+const apiUrl = 'http://25.65.240.25';
 
 const regionesChile = [
   'Región de Arica y Parinacota',
