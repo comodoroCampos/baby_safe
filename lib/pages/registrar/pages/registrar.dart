@@ -87,7 +87,7 @@ class RegistrarUsuario extends StatelessWidget {
                                 onChanged: (value) {
                                   formRegistroUsuario['perfil'] =
                                       value ?? 'Seleccione';
-                                  this.variable = value;
+                                  variable = value;
                                 }),
                           ])),
                   Container(
@@ -104,9 +104,9 @@ class RegistrarUsuario extends StatelessWidget {
                           onPressed: () async {
                             FocusScope.of(context).requestFocus(FocusNode());
 
-                            if (this.variable == 'Tutor') {
+                            if (variable == 'Tutor') {
                               Navigator.pushNamed(context, 'registro_tutor');
-                            } else if (this.variable == 'Niñera') {
+                            } else if (variable == 'Niñera') {
                               Navigator.pushNamed(context, 'registro_ninera');
                             }
 
