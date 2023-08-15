@@ -1,6 +1,9 @@
+import 'package:baby_safe/bloc/usuario/usuario_bloc.dart';
+import 'package:baby_safe/models/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../nineras/input/input_string_ninera.dart';
 import '../../nineras/input/select_item_ninera.dart';
@@ -11,6 +14,7 @@ class RegistrarUsuario extends StatelessWidget {
   final TextEditingController _typeAheadController = TextEditingController();
   final Map<String, Object> formRegistroUsuario = {
     'mail': '',
+    'usuario': '',
     'pass': '',
     'perfil': ''
   };
@@ -18,6 +22,7 @@ class RegistrarUsuario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final usuarioBloc = BlocProvider.of<UsuarioBloc>(context, listen: false);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -41,6 +46,18 @@ class RegistrarUsuario extends StatelessWidget {
                           alignment: WrapAlignment.start,
                           spacing: 10,
                           children: [
+                            InputStringNinera(
+                                lineas: 1,
+                                width: double.infinity,
+                                obscureText: false,
+                                requerido: true,
+                                formProperty: 'usuario',
+                                suffixIcon: Icons.search_outlined,
+                                labelText: 'Nombre usuario',
+                                msjValidacion: 'Ingrese nombre usuario',
+                                soloLectura: false,
+                                valorInicial: '',
+                                formValues: formRegistroUsuario),
                             InputStringNinera(
                                 lineas: 1,
                                 width: double.infinity,
@@ -103,7 +120,15 @@ class RegistrarUsuario extends StatelessWidget {
                           ),
                           onPressed: () async {
                             FocusScope.of(context).requestFocus(FocusNode());
-
+                            usuarioBloc.add(IniciaUsuario(Usuario(
+                                correo:
+                                    formRegistroUsuario['nombre'].toString(),
+                                perfil:
+                                    formRegistroUsuario['perfil'].toString(),
+                                pass: formRegistroUsuario['pass'].toString(),
+                                usuario:
+                                    formRegistroUsuario['usuario'].toString(),
+                                permisos: [])));
                             if (variable == 'Tutor') {
                               Navigator.pushNamed(context, 'registro_tutor');
                             } else if (variable == 'Niñera') {
