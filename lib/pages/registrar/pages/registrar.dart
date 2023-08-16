@@ -120,21 +120,22 @@ class RegistrarUsuario extends StatelessWidget {
                           ),
                           onPressed: () async {
                             FocusScope.of(context).requestFocus(FocusNode());
-                            usuarioBloc.add(IniciaUsuario(Usuario(
-                                correo:
-                                    formRegistroUsuario['nombre'].toString(),
-                                perfil:
-                                    formRegistroUsuario['perfil'].toString(),
-                                pass: formRegistroUsuario['pass'].toString(),
-                                usuario:
-                                    formRegistroUsuario['usuario'].toString(),
-                                permisos: [])));
-                            if (variable == 'Tutor') {
-                              Navigator.pushNamed(context, 'registro_tutor');
-                            } else if (variable == 'Niñera') {
-                              Navigator.pushNamed(context, 'registro_ninera');
+                            if (myFormKey.currentState!.validate()) {
+                              usuarioBloc.add(IniciaUsuario(Usuario(
+                                  correo:
+                                      formRegistroUsuario['nombre'].toString(),
+                                  perfil:
+                                      formRegistroUsuario['perfil'].toString(),
+                                  pass: formRegistroUsuario['pass'].toString(),
+                                  usuario:
+                                      formRegistroUsuario['usuario'].toString(),
+                                  permisos: [])));
+                              if (variable == 'Tutor') {
+                                Navigator.pushNamed(context, 'registro_tutor');
+                              } else if (variable == 'Niñera') {
+                                Navigator.pushNamed(context, 'registro_ninera');
+                              }
                             }
-
                             //mesaje
                           })),
                 ],
