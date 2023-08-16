@@ -186,7 +186,7 @@ class RegistroNineraPage extends StatelessWidget {
                             errorStyle: TextStyle(color: Colors.redAccent),
                             border: OutlineInputBorder(),
                             suffixIcon: Icon(Icons.event_note),
-                            labelText: 'Only time',
+                            labelText: 'Seleccionar del calendario',
                           ),
                           mode: DateTimeFieldPickerMode.date,
                           autovalidateMode: AutovalidateMode.always,
