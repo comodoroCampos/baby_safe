@@ -3,8 +3,12 @@ import 'package:baby_safe/pages/nineras/input/input_number_tutor.dart';
 import 'package:baby_safe/services/ninera_service.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/usuario/usuario_bloc.dart';
 import '../../../config/menu/menu.dart';
+import '../../../models/usuario.dart';
+import '../../../services/usuarioService.dart';
 import '../../../utils/constantes.dart';
 import '../input/input_string_ninera.dart';
 import '../input/select_item_ninera.dart';
@@ -14,6 +18,7 @@ class RegistroNineraPage extends StatelessWidget {
   final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
   final TextEditingController _typeAheadController = TextEditingController();
   final nineraService = NineraService();
+  final usuarioService = UsuarioService();
   final Map<String, Object> formNinera = {
     'nombre': '',
     'calle_numero': '',
@@ -28,6 +33,7 @@ class RegistroNineraPage extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
+    final usuarioBloc = BlocProvider.of<UsuarioBloc>(context, listen: false);
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -184,39 +190,48 @@ class RegistroNineraPage extends StatelessWidget {
                           ),
                           mode: DateTimeFieldPickerMode.date,
                           autovalidateMode: AutovalidateMode.always,
-                          validator: (e) => (e?.day ?? 0) == 1
-                              ? 'Please not the first day'
-                              : null,
+                          validator: (e) =>
+                              (e == null) ? 'Please not the first day' : null,
                           onDateSelected: (DateTime value) {
-                            print(value);
+                            formNinera['calle_numero'] = value;
                           },
                         ),
                         Center(
                           child: ElevatedButton(
                               onPressed: () {
                                 if (myFormKey.currentState!.validate()) {
-                                  nineraService.guardaNinera(Ninera(
-                                      nombre: formNinera['nombre'].toString(),
-                                      calleNumero:
-                                          formNinera['calle_numero'].toString(),
-                                      ciudad: formNinera['ciudad'].toString(),
-                                      correo: formNinera['correo'].toString(),
-                                      descripcion:
-                                          formNinera['nombre'].toString(),
-                                      estadoCivil:
-                                          formNinera['estado_civil'].toString(),
-                                      estudios:
-                                          formNinera['estudios'].toString(),
-                                      fechaNacimiento: DateTime.now(),
-                                      foto:
-                                          'https://imgv3.fotor.com/images/videoImage/ai-generated-beautiful-girl-like-a-beautiful-model-by-Fotor-ai-image-generator_2023-05-30-053050_brwf.jpg',
-                                      pass: formNinera['pass'].toString(),
-                                      region: formNinera['region'].toString(),
-                                      telefono:
-                                          formNinera['telefono'].toString(),
-                                      valorHora: int.parse(
-                                          formNinera['valor_hora']
-                                              .toString())));
+                                  Usuario? user = usuarioBloc.state.usuario;
+                                  user?.copyWith(
+                                      ninera: Ninera(
+                                          nombre:
+                                              formNinera['nombre'].toString(),
+                                          calleNumero:
+                                              formNinera['calle_numero']
+                                                  .toString(),
+                                          ciudad:
+                                              formNinera['ciudad'].toString(),
+                                          correo:
+                                              formNinera['correo'].toString(),
+                                          descripcion:
+                                              formNinera['nombre'].toString(),
+                                          estadoCivil:
+                                              formNinera['estado_civil']
+                                                  .toString(),
+                                          estudios:
+                                              formNinera['estudios'].toString(),
+                                          fechaNacimiento: DateTime.now(),
+                                          foto:
+                                              'https://imgv3.fotor.com/images/videoImage/ai-generated-beautiful-girl-like-a-beautiful-model-by-Fotor-ai-image-generator_2023-05-30-053050_brwf.jpg',
+                                          pass: formNinera['pass'].toString(),
+                                          region:
+                                              formNinera['region'].toString(),
+                                          telefono:
+                                              formNinera['telefono'].toString(),
+                                          valorHora: int.parse(
+                                              formNinera['valor_hora']
+                                                  .toString())));
+
+                                  usuarioService.guardaUsuario(user!);
                                 }
                               },
                               child: const Text('Registrar')),
