@@ -123,7 +123,7 @@ class RegistrarUsuario extends StatelessWidget {
                             if (myFormKey.currentState!.validate()) {
                               usuarioBloc.add(IniciaUsuario(Usuario(
                                   correo:
-                                      formRegistroUsuario['nombre'].toString(),
+                                      formRegistroUsuario['mail'].toString(),
                                   perfil:
                                       formRegistroUsuario['perfil'].toString(),
                                   pass: formRegistroUsuario['pass'].toString(),
