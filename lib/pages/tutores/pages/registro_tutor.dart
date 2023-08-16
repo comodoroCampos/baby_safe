@@ -24,8 +24,6 @@ class RegistroTutorPage extends StatelessWidget {
     'region': '',
     'telefono': '',
     'descripcion': '',
-    'correo': '',
-    'pass': '',
   };
   @override
   Widget build(BuildContext context) {
@@ -79,18 +77,6 @@ class RegistroTutorPage extends StatelessWidget {
                         InputStringNinera(
                             lineas: 1,
                             width: double.infinity,
-                            obscureText: true,
-                            requerido: false,
-                            formProperty: 'pass',
-                            suffixIcon: Icons.search_outlined,
-                            labelText: 'Contraseña',
-                            msjValidacion: 'Ingrese su contraseña',
-                            soloLectura: false,
-                            valorInicial: '',
-                            formValues: formTutor),
-                        InputStringNinera(
-                            lineas: 1,
-                            width: double.infinity,
                             obscureText: false,
                             requerido: false,
                             formProperty: 'calle_numero',
@@ -133,18 +119,6 @@ class RegistroTutorPage extends StatelessWidget {
                             onChanged: (value) {
                               formTutor['region'] = value ?? 'Seleccione';
                             }),
-                        InputStringNinera(
-                            lineas: 1,
-                            width: double.infinity,
-                            obscureText: false,
-                            requerido: false,
-                            formProperty: 'correo',
-                            suffixIcon: Icons.search_outlined,
-                            labelText: 'correo electronico',
-                            msjValidacion: 'Ingrese su correo electronico',
-                            soloLectura: false,
-                            valorInicial: '',
-                            formValues: formTutor),
                         InputStringNinera(
                             lineas: 1,
                             width: double.infinity,

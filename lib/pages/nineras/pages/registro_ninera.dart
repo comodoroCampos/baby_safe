@@ -186,12 +186,11 @@ class RegistroNineraPage extends StatelessWidget {
                             errorStyle: TextStyle(color: Colors.redAccent),
                             border: OutlineInputBorder(),
                             suffixIcon: Icon(Icons.event_note),
-                            labelText: 'Seleccionar del calendario',
+                            labelText: 'Seleccionar fecha del calendario',
                           ),
                           mode: DateTimeFieldPickerMode.date,
                           autovalidateMode: AutovalidateMode.always,
-                          validator: (e) =>
-                              (e == null) ? 'Please not the first day' : null,
+                          validator: (e) => (e == null) ? '' : null,
                           onDateSelected: (DateTime value) {
                             formNinera['calle_numero'] = value;
                           },
