@@ -90,8 +90,7 @@ class LoginPage extends StatelessWidget {
                                           obscureText: false,
                                           requerido: true,
                                           formProperty: 'user',
-                                          suffixIcon: Icons
-                                              .supervised_user_circle_outlined,
+                                          suffixIcon: Icons.supervisor_account,
                                           labelText: 'Usuario',
                                           msjValidacion: 'usuario obligatorio',
                                           formValues: formValues),
