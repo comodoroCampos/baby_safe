@@ -28,7 +28,7 @@ class RegistrarUsuario extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Registro De Usuario',
                 style: TextStyle(fontSize: 16)),
-            backgroundColor: const Color.fromARGB(198, 247, 3, 166),
+            backgroundColor: Color.fromARGB(197, 62, 165, 3),
           ),
           body: SingleChildScrollView(
               child: Container(

@@ -132,23 +132,32 @@ class RegistroNineraPage extends StatelessWidget {
                               return null;
                             },
                             items: getListaSelectNinera(
-                                ['Seleccione', 'Solter@', 'Casad@']),
+                                ['Seleccione', 'Soltera', 'Casada']),
                             onChanged: (value) {
                               formNinera['estado_civil'] =
                                   value ?? 'Seleccione';
                             }),
-                        InputStringNinera(
-                            lineas: 1,
-                            width: double.infinity,
-                            obscureText: false,
-                            requerido: false,
-                            formProperty: 'estudios',
-                            suffixIcon: Icons.search_outlined,
-                            labelText: 'Estudios',
-                            msjValidacion: 'ingrese su nivel de estudios',
-                            soloLectura: false,
-                            valorInicial: '',
-                            formValues: formNinera),
+                        DropdownButtonFormField<String>(
+                            value: 'Educación Superior',
+                            focusColor: Colors.black,
+                            decoration: const InputDecoration(
+                                labelText: 'Estudios',
+                                fillColor: Colors.black,
+                                focusColor: Colors.black,
+                                isDense: true),
+                            validator: (value) {
+                              if (value == null) {
+                                return 'Seleccione nivel de estudios';
+                              }
+                              if (value == 'Seleccione') {
+                                return 'Seleccione nivel de estudios';
+                              }
+                              return null;
+                            },
+                            items: getListaSelectNinera(estudios),
+                            onChanged: (value) {
+                              formNinera['estudios'] = value ?? 'Seleccione';
+                            }),
                         InputStringNinera(
                             lineas: 1,
                             width: double.infinity,
