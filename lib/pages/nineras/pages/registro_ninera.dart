@@ -162,7 +162,7 @@ class RegistroNineraPage extends StatelessWidget {
                             lineas: 1,
                             width: double.infinity,
                             obscureText: false,
-                            requerido: false,
+                            requerido: true,
                             formProperty: 'telefono',
                             suffixIcon: Icons.search_outlined,
                             labelText: 'Telefono',
