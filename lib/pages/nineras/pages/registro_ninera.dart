@@ -1,12 +1,15 @@
 import 'package:baby_safe/models/ninera.dart';
 import 'package:baby_safe/pages/nineras/input/input_number_tutor.dart';
 import 'package:baby_safe/services/ninera_service.dart';
+import 'package:baby_safe/services/ubicaciones_service.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../../../bloc/usuario/usuario_bloc.dart';
 import '../../../config/menu/menu.dart';
+import '../../../models/suggestions.dart';
 import '../../../models/usuario.dart';
 import '../../../services/usuarioService.dart';
 import '../../../utils/constantes.dart';
@@ -19,6 +22,7 @@ class RegistroNineraPage extends StatelessWidget {
   final TextEditingController _typeAheadController = TextEditingController();
   final nineraService = NineraService();
   final usuarioService = UsuarioService();
+  final ubicacionespService = UbicacionService();
   final Map<String, Object> formNinera = {
     'nombre': '',
     'calle_numero': '',
@@ -69,18 +73,7 @@ class RegistroNineraPage extends StatelessWidget {
                             soloLectura: false,
                             valorInicial: '',
                             formValues: formNinera),
-                        InputStringNinera(
-                            lineas: 1,
-                            width: double.infinity,
-                            obscureText: false,
-                            requerido: false,
-                            formProperty: 'calle_numero',
-                            suffixIcon: Icons.search_outlined,
-                            labelText: 'Dirección',
-                            msjValidacion: 'ingrese su dirección',
-                            soloLectura: false,
-                            valorInicial: '',
-                            formValues: formNinera),
+                        autoCompleteDireccion(),
                         InputStringNinera(
                             lineas: 1,
                             width: double.infinity,
@@ -243,5 +236,39 @@ class RegistroNineraPage extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  Widget autoCompleteDireccion() {
+    List<String> direcciones = [];
+    return TypeAheadFormField(
+      textFieldConfiguration: TextFieldConfiguration(
+          controller: _typeAheadController,
+          decoration: const InputDecoration(labelText: 'Dirección')),
+      suggestionsCallback: (pattern) {
+        return ubicacionespService.getsugerencias(pattern);
+      },
+      itemBuilder: (context, Suggestion suggestion) {
+        return ListTile(
+          title: Text(suggestion.context?.address?.name ?? ''),
+          subtitle: Text(suggestion.context?.region?.name ?? ''),
+        );
+      },
+      transitionBuilder: (context, suggestionsBox, controller) {
+        return suggestionsBox;
+      },
+      onSuggestionSelected: (Suggestion suggestion) {
+        _typeAheadController.text = suggestion.context?.address?.name ?? '';
+        direcciones.add(suggestion.context?.address?.name ?? '');
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Seleccione Dirección';
+        }
+        if (!direcciones.contains(value)) {
+          return 'Direccion no válida';
+        }
+      },
+      onSaved: (value) => formNinera['calle_numero'] = value ?? '',
+    );
   }
 }
