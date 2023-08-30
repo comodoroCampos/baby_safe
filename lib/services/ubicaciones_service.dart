@@ -19,7 +19,7 @@ class UbicacionService {
     _ubicaciones.clear();
     Uri url = Uri.parse(
         '$urlMapBox/$query.json?proximity=ip&access_token=$tokenMapBox&limit=1');
-    final resp = await http.get(url, headers: header);
+    final resp = await http.get(url);
 
     if (resp.statusCode == 200) {
       final decodedResp = json.decode(resp.body);
@@ -40,7 +40,7 @@ class UbicacionService {
     }
     Uri url = Uri.parse(
         '$urlMapBoxSugerencia?q=$query&language=es&session_token=00d316a6-0ed8-41b1-88a4-45301f905c5b&access_token=$tokenMapBox');
-    final resp = await http.get(url, headers: header);
+    final resp = await http.get(url);
 
     if (resp.statusCode == 200) {
       final decodedResp = json.decode(resp.body);

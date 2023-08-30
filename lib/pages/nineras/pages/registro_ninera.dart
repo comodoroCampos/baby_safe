@@ -194,7 +194,7 @@ class RegistroNineraPage extends StatelessWidget {
                           autovalidateMode: AutovalidateMode.always,
                           validator: (e) => (e == null) ? '' : null,
                           onDateSelected: (DateTime value) {
-                            formNinera['calle_numero'] = value;
+                            formNinera['fecha_nacimiento'] = value;
                           },
                         ),
                         Center(
