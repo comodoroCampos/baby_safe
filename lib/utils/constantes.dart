@@ -24,3 +24,10 @@ const regionesChile = [
   'Región de Aysén',
   'Región de Magallanes'
 ];
+
+const estudios = [
+  'Educación Básica',
+  'Educación Media',
+  'Educación Técnico Superior',
+  'Educación Superior'
+];
