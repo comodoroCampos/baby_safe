@@ -1,4 +1,4 @@
-const apiUrl = 'http://192.168.100.8';
+const apiUrl = 'http://25.65.240.25';
 
 const urlMapBox = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 const urlMapBoxSugerencia =
