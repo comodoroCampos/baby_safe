@@ -1,9 +1,11 @@
+import 'package:baby_safe/bloc/map_bloc/mapa_bloc.dart';
 import 'package:baby_safe/bloc/nineras/nineras_bloc.dart';
 import 'package:baby_safe/bloc/tutor/tutor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app_routes.dart';
+import 'bloc/location_bloc/location_bloc.dart';
 import 'bloc/usuario/usuario_bloc.dart';
 import 'config/theme/app_theme.dart';
 
@@ -27,6 +29,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UsuarioBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MapaBloc(),
+        ),
+        BlocProvider(
+          create: (context) => LocacionBloc(),
         ),
       ],
       child: MaterialApp(

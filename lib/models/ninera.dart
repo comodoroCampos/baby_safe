@@ -15,40 +15,44 @@ class Ninera {
   String? descripcion;
   String? foto;
   String? pass;
+  double? latitud;
+  double? longitud;
 
-  Ninera({
-    this.id,
-    this.nombre,
-    this.calleNumero,
-    this.ciudad,
-    this.region,
-    this.fechaNacimiento,
-    this.estadoCivil,
-    this.estudios,
-    this.valorHora,
-    this.correo,
-    this.telefono,
-    this.descripcion,
-    this.foto,
-    this.pass,
-  });
+  Ninera(
+      {this.id,
+      this.nombre,
+      this.calleNumero,
+      this.ciudad,
+      this.region,
+      this.fechaNacimiento,
+      this.estadoCivil,
+      this.estudios,
+      this.valorHora,
+      this.correo,
+      this.telefono,
+      this.descripcion,
+      this.foto,
+      this.pass,
+      this.latitud,
+      this.longitud});
 
-  Ninera copyWith({
-    int? id,
-    String? nombre,
-    String? calleNumero,
-    String? ciudad,
-    String? region,
-    DateTime? fechaNacimiento,
-    String? estadoCivil,
-    String? estudios,
-    int? valorHora,
-    String? correo,
-    String? telefono,
-    String? descripcion,
-    String? foto,
-    String? pass,
-  }) =>
+  Ninera copyWith(
+          {int? id,
+          String? nombre,
+          String? calleNumero,
+          String? ciudad,
+          String? region,
+          DateTime? fechaNacimiento,
+          String? estadoCivil,
+          String? estudios,
+          int? valorHora,
+          String? correo,
+          String? telefono,
+          String? descripcion,
+          String? foto,
+          String? pass,
+          double? latitud,
+          double? longitud}) =>
       Ninera(
         id: id ?? this.id,
         nombre: nombre ?? this.nombre,
@@ -64,6 +68,8 @@ class Ninera {
         descripcion: descripcion ?? this.descripcion,
         foto: foto ?? this.foto,
         pass: pass ?? this.pass,
+        latitud: latitud ?? this.latitud,
+        longitud: longitud ?? this.longitud,
       );
 
   factory Ninera.fromJson(Map<String, dynamic> json) => Ninera(
@@ -87,6 +93,8 @@ class Ninera {
         descripcion: json["descripcion"],
         foto: json["foto"],
         pass: json["pass"],
+        latitud: json["latitud"].toDouble(),
+        longitud: json["longitud"].toDouble(),
       );
 
   Map<String, dynamic> toMap() => {
@@ -104,5 +112,7 @@ class Ninera {
         "descripcion": descripcion,
         "foto": foto,
         "pass": pass,
+        "latitud": latitud,
+        "longitud": longitud,
       };
 }

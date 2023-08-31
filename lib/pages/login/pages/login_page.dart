@@ -148,14 +148,14 @@ class LoginPage extends StatelessWidget {
                                                     IniciaNineras(nineras));
 
                                                 Navigator.pushNamed(
-                                                    context, 'ninera_list');
+                                                    context, 'mapa_ninera');
                                               } catch (e) {}
 
                                               //mesaje
                                             }),
                                       ),
                                       const SizedBox(
-                                        height: 60,
+                                        height: 40,
                                       ),
                                       Container(
                                         height: 40,
@@ -176,7 +176,7 @@ class LoginPage extends StatelessWidget {
                                                   .requestFocus(FocusNode());
 
                                               Navigator.pushNamed(
-                                                  context, 'registrar_usuario');
+                                                  context, 'mapa_ninera');
 
                                               //mesaje
                                             }),
