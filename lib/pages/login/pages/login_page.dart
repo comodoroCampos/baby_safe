@@ -176,7 +176,7 @@ class LoginPage extends StatelessWidget {
                                                   .requestFocus(FocusNode());
 
                                               Navigator.pushNamed(
-                                                  context, 'mapa_ninera');
+                                                  context, 'registrar_usuario');
 
                                               //mesaje
                                             }),

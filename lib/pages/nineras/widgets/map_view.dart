@@ -31,6 +31,7 @@ class MapaView extends StatelessWidget {
         onMapCreated: (controller) =>
             mapBloc.add(OnMapInitialzedEvent(controller)),
         markers: markers,
+
         // TODO: Markers
         // TODO: polylines
         // TODO: Cuando se mueve el mapa
