@@ -10,6 +10,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import '../../../bloc/usuario/usuario_bloc.dart';
 import '../../../config/menu/menu.dart';
 import '../../../models/suggestions.dart';
+import '../../../models/ubicacion_map.dart';
 import '../../../models/usuario.dart';
 import '../../../services/usuarioService.dart';
 import '../../../utils/constantes.dart';
@@ -28,7 +29,7 @@ class RegistroNineraPage extends StatelessWidget {
     'calle_numero': '',
     'ciudad': '',
     'region': '',
-    'fecha_nacimiento': '',
+    'fecha_nacimiento': DateTime.now(),
     'estado_civil': '',
     'estudios': '',
     'valor_hora': 0,
@@ -201,38 +202,31 @@ class RegistroNineraPage extends StatelessWidget {
                           child: ElevatedButton(
                               onPressed: () {
                                 if (myFormKey.currentState!.validate()) {
-                                  Usuario? user = usuarioBloc.state.usuario;
-                                  user?.copyWith(
-                                      ninera: Ninera(
-                                          nombre:
-                                              formNinera['nombre'].toString(),
-                                          calleNumero:
-                                              formNinera['calle_numero']
-                                                  .toString(),
-                                          ciudad:
-                                              formNinera['ciudad'].toString(),
-                                          correo:
-                                              formNinera['correo'].toString(),
-                                          descripcion:
-                                              formNinera['nombre'].toString(),
-                                          estadoCivil:
-                                              formNinera['estado_civil']
-                                                  .toString(),
-                                          estudios:
-                                              formNinera['estudios'].toString(),
-                                          fechaNacimiento: DateTime.now(),
-                                          foto:
-                                              'https://imgv3.fotor.com/images/videoImage/ai-generated-beautiful-girl-like-a-beautiful-model-by-Fotor-ai-image-generator_2023-05-30-053050_brwf.jpg',
-                                          pass: formNinera['pass'].toString(),
-                                          region:
-                                              formNinera['region'].toString(),
-                                          telefono:
-                                              formNinera['telefono'].toString(),
-                                          valorHora: int.parse(
-                                              formNinera['valor_hora']
-                                                  .toString())));
+                                  usuarioBloc.add(CargaNineraUsuario(Ninera(
+                                      nombre: formNinera['nombre'].toString(),
+                                      calleNumero:
+                                          formNinera['calle_numero'].toString(),
+                                      ciudad: formNinera['ciudad'].toString(),
+                                      correo: formNinera['correo'].toString(),
+                                      descripcion:
+                                          formNinera['nombre'].toString(),
+                                      estadoCivil:
+                                          formNinera['estado_civil'].toString(),
+                                      estudios:
+                                          formNinera['estudios'].toString(),
+                                      fechaNacimiento: DateTime.now(),
+                                      foto:
+                                          'https://imgv3.fotor.com/images/videoImage/ai-generated-beautiful-girl-like-a-beautiful-model-by-Fotor-ai-image-generator_2023-05-30-053050_brwf.jpg',
+                                      pass: formNinera['pass'].toString(),
+                                      region: formNinera['region'].toString(),
+                                      telefono:
+                                          formNinera['telefono'].toString(),
+                                      valorHora: int.parse(
+                                          formNinera['valor_hora']
+                                              .toString()))));
 
-                                  usuarioService.guardaUsuario(user!);
+                                  usuarioService.guardaUsuario(
+                                      usuarioBloc.state.usuario!);
                                 }
                               },
                               child: const Text('Registrar')),
@@ -277,7 +271,12 @@ class RegistroNineraPage extends StatelessWidget {
           return 'Direccion no válida';
         }
       },
-      onSaved: (value) => formNinera['calle_numero'] = value ?? '',
+      onSaved: (value) {
+        formNinera['calle_numero'] = value ?? '';
+        if (value != null) {
+          ubicacionespService.getUbicaciones(value);
+        }
+      },
     );
   }
 }
