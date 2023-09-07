@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:baby_safe/models/ninera.dart';
 import 'package:baby_safe/pages/nineras/input/input_number_tutor.dart';
 import 'package:baby_safe/services/ninera_service.dart';
@@ -24,6 +26,7 @@ class RegistroNineraPage extends StatelessWidget {
   final nineraService = NineraService();
   final usuarioService = UsuarioService();
   final ubicacionespService = UbicacionService();
+  List<UbicacionMap> ubicaciones = [];
   final Map<String, Object> formNinera = {
     'nombre': '',
     'calle_numero': '',
@@ -35,6 +38,8 @@ class RegistroNineraPage extends StatelessWidget {
     'valor_hora': 0,
     'telefono': '',
     'descripcion': '',
+    'lat': 0.0,
+    'lng': 0.0,
   };
   @override
   Widget build(BuildContext context) {
@@ -209,7 +214,7 @@ class RegistroNineraPage extends StatelessWidget {
                                       ciudad: formNinera['ciudad'].toString(),
                                       correo: formNinera['correo'].toString(),
                                       descripcion:
-                                          formNinera['nombre'].toString(),
+                                          formNinera['descripcion'].toString(),
                                       estadoCivil:
                                           formNinera['estado_civil'].toString(),
                                       estudios:
@@ -222,8 +227,11 @@ class RegistroNineraPage extends StatelessWidget {
                                       telefono:
                                           formNinera['telefono'].toString(),
                                       valorHora: int.parse(
-                                          formNinera['valor_hora']
-                                              .toString()))));
+                                          formNinera['valor_hora'].toString()),
+                                      latitud: double.parse(
+                                          formNinera['lat'].toString()),
+                                      longitud: double.parse(
+                                          formNinera['lng'].toString()))));
 
                                   usuarioService.guardaUsuario(
                                       usuarioBloc.state.usuario!);
@@ -271,10 +279,14 @@ class RegistroNineraPage extends StatelessWidget {
           return 'Direccion no válida';
         }
       },
-      onSaved: (value) {
+      onSaved: (value) async {
         formNinera['calle_numero'] = value ?? '';
         if (value != null) {
-          ubicacionespService.getUbicaciones(value);
+          for (UbicacionMap ub
+              in await ubicacionespService.getUbicaciones(value)) {
+            formNinera['lng'] = ub.center![0];
+            formNinera['lat'] = ub.center![1];
+          }
         }
       },
     );
