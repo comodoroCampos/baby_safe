@@ -278,17 +278,25 @@ class RegistroNineraPage extends StatelessWidget {
         if (!direcciones.contains(value)) {
           return 'Direccion no válida';
         }
+        if (value != null) {
+          formNinera['calle_numero'] = value;
+          _cargaUnicaiones(value);
+        }
       },
-      onSaved: (value) async {
+      onSaved: (value) {
         formNinera['calle_numero'] = value ?? '';
         if (value != null) {
-          for (UbicacionMap ub
-              in await ubicacionespService.getUbicaciones(value)) {
-            formNinera['lng'] = ub.center![0];
-            formNinera['lat'] = ub.center![1];
-          }
+          _cargaUnicaiones(value);
         }
       },
     );
+  }
+
+  _cargaUnicaiones(String direccion) async {
+    for (UbicacionMap ub
+        in await ubicacionespService.getUbicaciones(direccion)) {
+      formNinera['lng'] = ub.center![0];
+      formNinera['lat'] = ub.center![1];
+    }
   }
 }
