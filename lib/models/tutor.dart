@@ -2,8 +2,8 @@ import '../utils/utils.dart';
 
 class Tutor {
   int? id;
-  String? nombre;
-  String? apellido;
+  String? nombres;
+  String? apellidos;
   String? calleNumero;
   String? ciudad;
   String? region;
@@ -12,38 +12,42 @@ class Tutor {
   String? descripcion;
   String? foto;
   String? pass;
+  double? latitud;
+  double? longitud;
 
-  Tutor({
-    this.id,
-    this.nombre,
-    this.apellido,
-    this.calleNumero,
-    this.ciudad,
-    this.region,
-    this.correo,
-    this.telefono,
-    this.descripcion,
-    this.foto,
-    this.pass,
-  });
+  Tutor(
+      {this.id,
+      this.nombres,
+      this.apellidos,
+      this.calleNumero,
+      this.ciudad,
+      this.region,
+      this.correo,
+      this.telefono,
+      this.descripcion,
+      this.foto,
+      this.pass,
+      this.latitud,
+      this.longitud});
 
-  Tutor copyWith({
-    int? id,
-    String? nombre,
-    String? apellido,
-    String? calleNumero,
-    String? ciudad,
-    String? region,
-    String? correo,
-    String? telefono,
-    String? descripcion,
-    String? foto,
-    String? pass,
-  }) =>
+  Tutor copyWith(
+          {int? id,
+          String? nombres,
+          String? apellidos,
+          String? calleNumero,
+          String? ciudad,
+          String? region,
+          String? correo,
+          String? telefono,
+          String? descripcion,
+          String? foto,
+          String? pass,
+          double? latitud,
+          double? longitud}) =>
       Tutor(
         id: id ?? this.id,
-        nombre: nombre ?? this.nombre,
-        apellido: apellido ?? this.apellido,
+        nombres: nombres ?? this.nombres,
+        apellidos: apellidos ?? this.apellidos,
         calleNumero: calleNumero ?? this.calleNumero,
         ciudad: ciudad ?? this.ciudad,
         region: region ?? this.region,
@@ -52,16 +56,18 @@ class Tutor {
         descripcion: descripcion ?? this.descripcion,
         foto: foto ?? this.foto,
         pass: pass ?? this.pass,
+        latitud: latitud ?? this.latitud,
+        longitud: longitud ?? this.longitud,
       );
 
   factory Tutor.fromJson(Map<String, dynamic> json) => Tutor(
         id: json["id"],
-        nombre: json["nombre"] == null
+        nombres: json["nombres"] == null
             ? null
-            : Utilidades.utf8convert(json["nombre"]),
-        apellido: json["apellido"] == null
+            : Utilidades.utf8convert(json["nombres"]),
+        apellidos: json["apellidos"] == null
             ? null
-            : Utilidades.utf8convert(json["apellido"]),
+            : Utilidades.utf8convert(json["apellidos"]),
         calleNumero: json["calleNumero"] == null
             ? null
             : Utilidades.utf8convert(json["calleNumero"]),
@@ -72,12 +78,14 @@ class Tutor {
         descripcion: json["descripcion"],
         foto: json["foto"],
         pass: json["pass"],
+        latitud: json["latitud"].toDouble(),
+        longitud: json["longitud"].toDouble(),
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "nombre": nombre,
-        "apellido": apellido,
+        "nombres": nombres,
+        "apellidos": apellidos,
         "calleNumero": calleNumero,
         "ciudad": ciudad,
         "region": region,
@@ -86,5 +94,7 @@ class Tutor {
         "descripcion": descripcion,
         "foto": foto,
         "pass": pass,
+        "latitud": latitud,
+        "longitud": longitud,
       };
 }
