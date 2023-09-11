@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/nineras/nineras_bloc.dart';
@@ -147,9 +148,14 @@ class LoginPage extends StatelessWidget {
                                                 ninerasBloc.add(
                                                     IniciaNineras(nineras));
 
+                                                // ignore: use_build_context_synchronously
                                                 Navigator.pushNamed(
                                                     context, 'mapa_ninera');
-                                              } catch (e) {}
+                                              } catch (e) {
+                                                if (kDebugMode) {
+                                                  print(e);
+                                                }
+                                              }
 
                                               //mesaje
                                             }),

@@ -11,11 +11,14 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../../../bloc/usuario/usuario_bloc.dart';
 import '../../../config/menu/menu.dart';
+import '../../../models/feature_map.dart';
 import '../../../models/suggestions.dart';
 import '../../../models/ubicacion_map.dart';
+
 import '../../../models/usuario.dart';
 import '../../../services/usuarioService.dart';
 import '../../../utils/constantes.dart';
+import '../../../utils/utils.dart';
 import '../input/input_string_ninera.dart';
 import '../input/select_item_ninera.dart';
 
@@ -26,7 +29,7 @@ class RegistroNineraPage extends StatelessWidget {
   final nineraService = NineraService();
   final usuarioService = UsuarioService();
   final ubicacionespService = UbicacionService();
-  List<UbicacionMap> ubicaciones = [];
+  List<UbicacionMapbox> ubicaciones = [];
   final Map<String, Object> formNinera = {
     'nombre': '',
     'calle_numero': '',
@@ -188,26 +191,30 @@ class RegistroNineraPage extends StatelessWidget {
                           decimales: false,
                           valorInicial: '0',
                         ),
-                        DateTimeFormField(
-                          decoration: const InputDecoration(
-                            hintStyle: TextStyle(color: Colors.black45),
-                            errorStyle: TextStyle(color: Colors.redAccent),
-                            border: OutlineInputBorder(),
-                            suffixIcon: Icon(Icons.event_note),
-                            labelText: 'Seleccionar fecha del calendario',
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 13),
+                          child: DateTimeFormField(
+                            decoration: const InputDecoration(
+                              hintStyle: TextStyle(color: Colors.black45),
+                              errorStyle: TextStyle(color: Colors.redAccent),
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.event_note),
+                              labelText: 'Seleccionar fecha nacimiento',
+                            ),
+                            mode: DateTimeFieldPickerMode.date,
+                            autovalidateMode: AutovalidateMode.always,
+                            validator: (e) => (e == null) ? '' : null,
+                            onDateSelected: (DateTime value) {
+                              formNinera['fecha_nacimiento'] = value;
+                            },
                           ),
-                          mode: DateTimeFieldPickerMode.date,
-                          autovalidateMode: AutovalidateMode.always,
-                          validator: (e) => (e == null) ? '' : null,
-                          onDateSelected: (DateTime value) {
-                            formNinera['fecha_nacimiento'] = value;
-                          },
                         ),
                         Center(
                           child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (myFormKey.currentState!.validate()) {
-                                  usuarioBloc.add(CargaNineraUsuario(Ninera(
+                                  Usuario user = usuarioBloc.state.usuario!;
+                                  user.ninera = Ninera(
                                       nombre: formNinera['nombre'].toString(),
                                       calleNumero:
                                           formNinera['calle_numero'].toString(),
@@ -231,10 +238,14 @@ class RegistroNineraPage extends StatelessWidget {
                                       latitud: double.parse(
                                           formNinera['lat'].toString()),
                                       longitud: double.parse(
-                                          formNinera['lng'].toString()))));
-
-                                  usuarioService.guardaUsuario(
-                                      usuarioBloc.state.usuario!);
+                                          formNinera['lng'].toString()));
+                                  usuarioBloc
+                                      .add(CargaNineraUsuario(user.ninera!));
+                                  Utilidades.mostrarAlerta(
+                                      'Guardando...', context);
+                                  await usuarioService.guardaUsuario(user);
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.pushNamed(context, 'login');
                                 }
                               },
                               child: const Text('Registrar')),
@@ -270,6 +281,10 @@ class RegistroNineraPage extends StatelessWidget {
       onSuggestionSelected: (Suggestion suggestion) {
         _typeAheadController.text = suggestion.context?.address?.name ?? '';
         direcciones.add(suggestion.context?.address?.name ?? '');
+        formNinera['calle_numero'] = suggestion.context?.address?.name ?? '';
+        if (suggestion.context?.address?.name != null) {
+          _cargaUnicaiones(suggestion.context?.address?.name ?? '');
+        }
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -293,10 +308,10 @@ class RegistroNineraPage extends StatelessWidget {
   }
 
   _cargaUnicaiones(String direccion) async {
-    for (UbicacionMap ub
-        in await ubicacionespService.getUbicaciones(direccion)) {
-      formNinera['lng'] = ub.center![0];
-      formNinera['lat'] = ub.center![1];
+    UbicacionMapbox? mp = await ubicacionespService.getUbicaciones(direccion);
+    for (FeatureMap ub in mp?.features ?? []) {
+      formNinera['lat'] = ub.geometry!.coordinates![1];
+      formNinera['lng'] = ub.geometry!.coordinates![0];
     }
   }
 }

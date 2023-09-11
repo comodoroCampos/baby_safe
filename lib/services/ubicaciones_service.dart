@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -8,29 +9,27 @@ import '../utils/constantes.dart';
 
 class UbicacionService {
   final storage = const FlutterSecureStorage();
-  final List<UbicacionMap> _ubicaciones = [];
+
   final List<Suggestion> _sugerencias = [];
 
   Map<String, String> header = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   };
-  Future<List<UbicacionMap>> getUbicaciones(String query) async {
-    _ubicaciones.clear();
+  Future<UbicacionMapbox?> getUbicaciones(String query) async {
     Uri url = Uri.parse(
         '$urlMapBox/$query.json?proximity=ip&access_token=$tokenMapBox&limit=1');
     final resp = await http.get(url);
 
     if (resp.statusCode == 200) {
       final decodedResp = json.decode(resp.body);
-
-      final ord =
-          (decodedResp as List).map((x) => UbicacionMap.fromJson(x)).toList();
-
-      _ubicaciones.addAll(ord);
+      if (kDebugMode) {
+        print(decodedResp);
+      }
+      return UbicacionMapbox.fromJson(decodedResp);
     }
 
-    return _ubicaciones;
+    return null;
   }
 
   Future<List<Suggestion>> getsugerencias(String query) async {
@@ -44,13 +43,6 @@ class UbicacionService {
 
     if (resp.statusCode == 200) {
       final decodedResp = json.decode(resp.body);
-
-      // final ord =(decodedResp as List).map((x) => Suggestion.fromJson(x)).toList();
-      // List<Suggestion>.from(
-      //     decodedResp["suggestions"]!.map((x) => Suggestion.fromJson(x)));
-      // final ord = (decodedResp['suggestions'] as List)
-      //     .map((x) => Suggestion.fromJson(x))
-      //     .toList();
 
       _sugerencias.addAll(List<Suggestion>.from(
           decodedResp["suggestions"]!.map((x) => Suggestion.fromJson(x))));
