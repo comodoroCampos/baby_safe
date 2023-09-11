@@ -17,11 +17,12 @@ class InicioNinera extends StatelessWidget {
         backgroundColor: const Color.fromARGB(198, 247, 3, 166),
       ),
       drawer: const MenuLateral(),
-      body: SingleChildScrollView(
+      body: SizedBox(
+        height: Medidas.heigth(100),
         child: Column(children: [
           SizedBox(height: Medidas.heigth(65), child: const MapaNineraPage()),
           SizedBox(
-              height: Medidas.heigth(35),
+              height: Medidas.heigth(20),
               child: NinerasPage(key: const Key('2'))),
         ]),
       ),
