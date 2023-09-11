@@ -2,6 +2,7 @@ import 'package:baby_safe/pages/nineras/pages/inicio_ninera.dart';
 import 'package:baby_safe/pages/nineras/pages/mapa_ninera.dart';
 import 'package:baby_safe/pages/nineras/pages/registro_ninera.dart';
 import 'package:baby_safe/pages/registrar/pages/registrar.dart';
+import 'package:baby_safe/pages/tutores/pages/editar_tutor.dart';
 import 'package:baby_safe/pages/tutores/pages/registro_tutor.dart';
 import 'package:flutter/material.dart';
 
@@ -19,5 +20,6 @@ class AppRouter {
     'registro_tutor': (context) => RegistroTutorPage(),
     'mapa_ninera': (context) => MapaNineraPage(),
     'inicio_ninera': (context) => InicioNinera(),
+    'editar_tutor': (context) => EditarTutorPage(),
   };
 }

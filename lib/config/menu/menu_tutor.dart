@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MenuLateral extends StatelessWidget {
-  const MenuLateral({Key? key}) : super(key: key);
+class MenuLateralTutor extends StatelessWidget {
+  const MenuLateralTutor({Key? key}) : super(key: key);
 
   final _textStyle = const TextStyle(fontSize: 15.0, color: Colors.black87);
   final _textStyleMenu = const TextStyle(fontSize: 15.0, color: Colors.white);
@@ -26,18 +26,18 @@ class MenuLateral extends StatelessWidget {
       children: [
         DrawerHeader(
           decoration: const BoxDecoration(
-            color: Color.fromARGB(220, 253, 5, 158),
+            color: Color.fromRGBO(88, 77, 190, 0.773),
           ),
           child: Column(
             children: [
               const FadeInImage(
                 width: 112,
-                image: AssetImage('assets/img/babysitter.png'),
-                placeholder: AssetImage('assets/img/babysitter.png'),
+                image: AssetImage('assets/img/mama.png'),
+                placeholder: AssetImage('assets/img/mama.png'),
                 fit: BoxFit.cover,
               ),
               Text(
-                'BabySitter',
+                'Tutor',
                 style: _textStyleMenu,
               ),
             ],
@@ -45,7 +45,7 @@ class MenuLateral extends StatelessWidget {
         ),
         ListTile(
           title: Text(
-            'Agenda',
+            'Nada aun',
             style: _textStyle,
           ),
           trailing: const Icon(
@@ -65,7 +65,7 @@ class MenuLateral extends StatelessWidget {
             color: Colors.black,
             size: 20,
           ),
-          onTap: () => Navigator.pushNamed(context, 'registro_ninera'),
+          onTap: () => Navigator.pushNamed(context, 'editar_tutor'),
         ),
         ListTile(
           title: Text(

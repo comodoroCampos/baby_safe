@@ -2,6 +2,7 @@ import 'package:baby_safe/utils/medida.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/menu/menu.dart';
+import '../../../config/menu/menu_tutor.dart';
 import 'mapa_ninera.dart';
 import 'ninera_list.dart';
 
@@ -13,10 +14,11 @@ class InicioNinera extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: const Text('Niñeras', style: TextStyle(fontSize: 16)),
-        backgroundColor: const Color.fromARGB(198, 247, 3, 166),
+        title:
+            const Text('Niñeras Disponibles', style: TextStyle(fontSize: 16)),
+        backgroundColor: Color.fromRGBO(88, 77, 190, 0.773),
       ),
-      drawer: const MenuLateral(),
+      drawer: const MenuLateralTutor(),
       body: SizedBox(
         height: Medidas.heigth(100),
         child: Column(children: [
