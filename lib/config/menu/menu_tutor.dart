@@ -45,7 +45,7 @@ class MenuLateralTutor extends StatelessWidget {
         ),
         ListTile(
           title: Text(
-            'Nada aun',
+            'Historial',
             style: _textStyle,
           ),
           trailing: const Icon(
@@ -53,7 +53,7 @@ class MenuLateralTutor extends StatelessWidget {
             color: Colors.black,
             size: 20,
           ),
-          onTap: () => Navigator.pushNamed(context, 'inicio_ninera'),
+          onTap: () => Navigator.pushNamed(context, 'historial'),
         ),
         ListTile(
           title: Text(
