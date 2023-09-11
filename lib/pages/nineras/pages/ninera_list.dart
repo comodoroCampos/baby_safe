@@ -15,11 +15,6 @@ class NinerasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Niñeras', style: TextStyle(fontSize: 16)),
-              backgroundColor: const Color.fromARGB(198, 247, 3, 166),
-            ),
-            drawer: const MenuLateral(),
             body: SingleChildScrollView(
                 child: Container(
                     decoration: const BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:baby_safe/pages/nineras/pages/inicio_ninera.dart';
 import 'package:baby_safe/pages/nineras/pages/mapa_ninera.dart';
 import 'package:baby_safe/pages/nineras/pages/registro_ninera.dart';
 import 'package:baby_safe/pages/registrar/pages/registrar.dart';
@@ -17,5 +18,6 @@ class AppRouter {
     'ninera_list': (context) => NinerasPage(),
     'registro_tutor': (context) => RegistroTutorPage(),
     'mapa_ninera': (context) => MapaNineraPage(),
+    'inicio_ninera': (context) => InicioNinera(),
   };
 }

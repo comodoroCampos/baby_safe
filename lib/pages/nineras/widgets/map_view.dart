@@ -25,7 +25,7 @@ class MapaView extends StatelessWidget {
         initialCameraPosition: initialCameraPosition,
         compassEnabled: false,
         myLocationEnabled: true,
-        zoomControlsEnabled: false,
+        zoomControlsEnabled: true,
         myLocationButtonEnabled: true,
 
         onMapCreated: (controller) =>

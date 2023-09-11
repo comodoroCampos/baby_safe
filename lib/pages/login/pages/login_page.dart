@@ -150,7 +150,7 @@ class LoginPage extends StatelessWidget {
 
                                                 // ignore: use_build_context_synchronously
                                                 Navigator.pushNamed(
-                                                    context, 'mapa_ninera');
+                                                    context, 'inicio_ninera');
                                               } catch (e) {
                                                 if (kDebugMode) {
                                                   print(e);
