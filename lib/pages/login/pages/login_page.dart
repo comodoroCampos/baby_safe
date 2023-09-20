@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/nineras/nineras_bloc.dart';
+import '../../../models/login.dart';
+import '../../../models/login_token.dart';
+import '../../../services/login_service.dart';
 import '../../../services/ninera_service.dart';
 import '../witget/input_string.dart';
 import 'package:baby_safe/utils/medida.dart';
@@ -15,6 +18,7 @@ class LoginPage extends StatelessWidget {
 
   Map<String, Object> formValues = {'user': '', 'pass': ''};
   final nineraService = NineraService();
+  final loginService = LoginService();
   @override
   Widget build(BuildContext context) {
     Medidas(context);
@@ -134,27 +138,34 @@ class LoginPage extends StatelessWidget {
                                                   .validate()) {
                                                 return;
                                               }
-
+                                              LoginToken? token;
                                               String user =
                                                   formValues['user'].toString();
                                               String pass =
                                                   formValues['pass'].toString();
-
                                               try {
+                                                token = await loginService
+                                                    .login(Login(
+                                                        user: user,
+                                                        pass: pass));
+                                              } catch (e) {}
+
+                                              if (token != null) {
                                                 final nineras =
                                                     await nineraService
                                                         .getNineras();
 
                                                 ninerasBloc.add(
                                                     IniciaNineras(nineras));
-
-                                                // ignore: use_build_context_synchronously
-                                                Navigator.pushNamed(
-                                                    context, 'inicio_ninera');
-                                              } catch (e) {
-                                                if (kDebugMode) {
-                                                  print(e);
+                                                if (token.perfil == 'Tutor') {
+                                                  // ignore: use_build_context_synchronously
+                                                  Navigator.pushNamed(
+                                                      context, 'inicio_ninera');
                                                 }
+                                              } else {
+                                                // ignore: use_build_context_synchronously
+                                                dialogo(context,
+                                                    'Usuario o contraseña incorrectos');
                                               }
 
                                               //mesaje

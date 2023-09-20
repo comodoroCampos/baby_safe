@@ -15,7 +15,7 @@ class TutorService {
   };
   Future<List<Tutor>> getTutores() async {
     _tutores.clear();
-    //header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
     Uri url = Uri.parse('$apiUrl/api-ninera/tutores');
     final resp = await http.get(url, headers: header);
 
@@ -32,7 +32,7 @@ class TutorService {
 
   Future<Tutor?> guardaTutor(Tutor tutor) async {
     // final urlApi = await storage.read(key: 'url') ?? '';
-    // header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
     print(json.encode(tutor.toMap()));
     Uri url = Uri.parse('$apiUrl/api-ninera/tutor');
     final resp =

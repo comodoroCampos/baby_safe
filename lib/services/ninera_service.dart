@@ -15,7 +15,7 @@ class NineraService {
   };
   Future<List<Ninera>> getNineras() async {
     _nineras.clear();
-    //header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
     Uri url = Uri.parse('$apiUrl/api-ninera/nineras');
     final resp = await http.get(url, headers: header);
 
@@ -32,7 +32,7 @@ class NineraService {
 
   Future<Ninera?> guardaNinera(Ninera ninera) async {
     // final urlApi = await storage.read(key: 'url') ?? '';
-    // header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
     print(json.encode(ninera.toMap()));
     Uri url = Uri.parse('$apiUrl/api-ninera/ninera');
     final resp = await http.post(url,

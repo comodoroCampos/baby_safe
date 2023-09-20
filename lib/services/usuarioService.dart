@@ -16,7 +16,7 @@ class UsuarioService {
   };
   Future<Usuario?> guardaUsuario(Usuario usuario) async {
     // final urlApi = await storage.read(key: 'url') ?? '';
-    // header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
+    header.addAll({"Authorization": await storage.read(key: 'token') ?? ''});
     if (kDebugMode) {
       print(json.encode(usuario.toJson()));
     }
