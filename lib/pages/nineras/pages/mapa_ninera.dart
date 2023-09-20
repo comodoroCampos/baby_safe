@@ -72,7 +72,7 @@ class _MapaNineraPageState extends State<MapaNineraPage> {
           markerId: MarkerId('${ptn.id}${ptn.nombre}'),
           position: LatLng(ptn.latitud!, ptn.longitud!),
           icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
           onTap: () {},
           infoWindow: InfoWindow(
             title: ' Nombre niñera: ${ptn.nombre} ',
