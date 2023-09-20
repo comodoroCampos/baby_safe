@@ -162,6 +162,11 @@ class LoginPage extends StatelessWidget {
                                                   Navigator.pushNamed(
                                                       context, 'inicio_ninera');
                                                 }
+                                                if (token.perfil == 'Niñera') {
+                                                  // ignore: use_build_context_synchronously
+                                                  Navigator.pushNamed(context,
+                                                      'registro_ninera');
+                                                }
                                               } else {
                                                 // ignore: use_build_context_synchronously
                                                 dialogo(context,
