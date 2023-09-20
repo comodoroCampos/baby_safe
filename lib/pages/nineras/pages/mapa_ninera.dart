@@ -75,8 +75,9 @@ class _MapaNineraPageState extends State<MapaNineraPage> {
               BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
           onTap: () {},
           infoWindow: InfoWindow(
-            title: ' ${ptn.nombre} ',
-            snippet: ' ${ptn.valorHora} ',
+            title: ' Nombre niñera: ${ptn.nombre} ',
+            snippet: ' Valor Hora: ${ptn.valorHora} '
+                ' Fono: ${ptn.telefono} ',
           )));
     }
   }
