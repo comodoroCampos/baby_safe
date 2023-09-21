@@ -16,15 +16,15 @@ class InicioNinera extends StatelessWidget {
       appBar: AppBar(
         title:
             const Text('Niñeras Disponibles', style: TextStyle(fontSize: 16)),
-        backgroundColor:const  Color.fromRGBO(88, 77, 190, 0.773),
+        backgroundColor: const Color.fromRGBO(88, 77, 190, 0.773),
       ),
       drawer: const MenuLateralTutor(),
       body: SizedBox(
         height: Medidas.heigth(100),
         child: Column(children: [
-          SizedBox(height: Medidas.heigth(65), child: const MapaNineraPage()),
+          SizedBox(height: Medidas.heigth(45), child: const MapaNineraPage()),
           SizedBox(
-              height: Medidas.heigth(20),
+              height: Medidas.heigth(40),
               child: NinerasPage(key: const Key('2'))),
         ]),
       ),
