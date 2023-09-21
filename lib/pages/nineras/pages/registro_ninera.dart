@@ -170,7 +170,7 @@ class RegistroNineraPage extends StatelessWidget {
                             labelText: 'Telefono',
                             msjValidacion: 'ingrese numero de contacto',
                             soloLectura: false,
-                            valorInicial: '',
+                            valorInicial: '+569-',
                             formValues: formNinera),
                         InputStringNinera(
                             lineas: 3,
