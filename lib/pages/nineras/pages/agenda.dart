@@ -19,9 +19,11 @@ import '../../../models/usuario.dart';
 import '../../../services/usuarioService.dart';
 import '../../../utils/constantes.dart';
 import '../../../utils/utils.dart';
+import '../input/input_string_ninera.dart';
+import '../input/select_item_ninera.dart';
 
-class HistorialTutorPage extends StatelessWidget {
-  HistorialTutorPage({super.key});
+class AgendaNineraPage extends StatelessWidget {
+  AgendaNineraPage({super.key});
   final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
   final TextEditingController _typeAheadController = TextEditingController();
   final nineraService = NineraService();
@@ -35,9 +37,8 @@ class HistorialTutorPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Historial de solicitudes',
-              style: TextStyle(fontSize: 16)),
-          backgroundColor: Color.fromRGBO(88, 77, 190, 0.773),
+          title: const Text('Mi Agenda', style: TextStyle(fontSize: 16)),
+          backgroundColor: const Color.fromARGB(198, 247, 3, 166),
         ),
         drawer: const MenuLateral(),
         body: SingleChildScrollView(
@@ -51,8 +52,8 @@ class HistorialTutorPage extends StatelessWidget {
               children: [
                 const FadeInImage(
                   width: 415,
-                  image: AssetImage('assets/img/contratadas.JPG'),
-                  placeholder: AssetImage('assets/img/contratadas.JPG'),
+                  image: AssetImage('assets/img/agenda.png'),
+                  placeholder: AssetImage('assets/img/agenda.png'),
                   fit: BoxFit.cover,
                 ),
               ],

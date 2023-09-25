@@ -53,7 +53,7 @@ class MenuLateral extends StatelessWidget {
             color: Colors.black,
             size: 20,
           ),
-          onTap: () => Navigator.pushNamed(context, 'inicio_ninera'),
+          onTap: () => Navigator.pushNamed(context, 'agenda'),
         ),
         ListTile(
           title: Text(
