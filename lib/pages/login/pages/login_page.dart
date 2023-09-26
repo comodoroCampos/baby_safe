@@ -164,8 +164,8 @@ class LoginPage extends StatelessWidget {
                                                 }
                                                 if (token.perfil == 'Niñera') {
                                                   // ignore: use_build_context_synchronously
-                                                  Navigator.pushNamed(context,
-                                                      'registro_ninera');
+                                                  Navigator.pushNamed(
+                                                      context, 'agenda');
                                                 }
                                               } else {
                                                 // ignore: use_build_context_synchronously
