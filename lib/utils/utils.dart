@@ -4,8 +4,15 @@ import 'package:flutter/material.dart';
 
 class Utilidades {
   static String utf8convert(String text) {
-    List<int> bytes = text.toString().codeUnits;
-    return utf8.decode(bytes);
+    String texto = '';
+    try {
+      List<int> bytes = text.codeUnits;
+      texto = utf8.decode(bytes);
+    } catch (e) {
+      texto = text;
+    }
+
+    return texto;
   }
 
   static void mostrarAlerta(String titulo, BuildContext context) {
